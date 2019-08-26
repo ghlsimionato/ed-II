@@ -20,12 +20,12 @@ int compactFile();
 int firstFit();
 
 int main() {
-  FILE * input = fopen("insere.bin", "r+");
+  FILE * input = fopen("./data/insere.bin", "r+");
   struct Register registerInstance;
   int menuChoice, quitMenu = FALSE;
 
   if (input == NULL) {
-    printf("File not recognized");
+    printf("\nData file not found/recognized\n");
 
     return 1;
   }
@@ -43,16 +43,16 @@ int main() {
         break;
 
       case REMOVE:
-        printf("Removing data");
+        printf("\nRemoving data\n");
         break;
 
       case QUIT:
-        printf("Quiting");
+        printf("\nQuiting\n");
         quitMenu = TRUE;
         break;
 
       default:
-        printf("Invalid Option");
+        printf("\nInvalid Option\n");
     }
   } while (quitMenu == FALSE);
 
@@ -69,4 +69,4 @@ struct Register readData(FILE * input) {
   fread(&data, sizeof(char), 153, input);
 
   return data;
-};
+}

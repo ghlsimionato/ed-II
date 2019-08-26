@@ -17,8 +17,33 @@
       "options": {
         "cwd": "/usr/bin"
       },
+      "problemMatcher": {
+        "owner": "cpp",
+        "fileLocation": ["relative", "${workspaceRoot}"],
+        "pattern": {
+            "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+        }
+      }
+    },
+    {
+      "label": "build main",
+      "type": "shell",
+      "command": "make buildprogram",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+          "reveal": "always",
+          "panel": "new"
+      },
       "problemMatcher": [
-        "$gcc"
+          "$gcc"
       ]
     }
   ]

@@ -12,8 +12,8 @@
 #define LOAD_FILES 5
 #define QUIT 0
 
-#define DATA_FILE_PATH "./data/insere.bin"
-#define OUTPUT_FILE_PATH "./build/main_file.bin"
+#define DATA_FILE_PATH "./data/input/insere.bin"
+#define OUTPUT_FILE_PATH "./data/output_file.bin"
 
 #define TRUE 1
 #define FALSE 0

@@ -7,9 +7,9 @@ OBJDIR = ./obj
 
 SRC = main.c
 
-buildprogram: $(OBJDIR)/main.o $(OBJDIR)/io.o
+build: $(OBJDIR)/main.o $(OBJDIR)/io.o
 	@echo "\nBuilding main program\n"
-	gcc -o ./build/main-prog $(OBJDIR)/main.o $(OBJDIR)/io.o
+	gcc -o ./build/insurance-reg $(OBJDIR)/main.o $(OBJDIR)/io.o
 	@echo "\nBuild completed!\n"
 
 $(OBJDIR)/main.o:	$(SRCDIR)/${SRC}
@@ -18,5 +18,12 @@ $(OBJDIR)/main.o:	$(SRCDIR)/${SRC}
 $(OBJDIR)/io.o: $(SRCDIR)/io.c $(SRCDIR)/headers/io.h
 	gcc -o $(OBJDIR)/io.o -c $(SRCDIR)/io.c $(CFLAGS)
 
+#TODO: make a decent clean
+
 clean:
-	rm -f *o	
+	rm -f ./obj/*.o	
+
+clean-build:
+	rm -f ./build/*
+
+clean-all: clean clean-build

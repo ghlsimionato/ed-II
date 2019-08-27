@@ -2,19 +2,8 @@
 
 #include "./headers/io.h"
 #include "./headers/structs.h"
-
-#define INSERT 1
-#define REMOVE 2
-#define COMPACT_FILE 3
-#define DUMP_FILE 4
-#define LOAD_FILES 5
-#define QUIT 0
-
-#define DATA_FILE_PATH "./data/input/insere.bin"
-#define OUTPUT_FILE_PATH "./data/output_file.bin"
-
-#define TRUE 1
-#define FALSE 0
+#include "./headers/constants.h"
+#include "./headers/insert.h"
 
 int main() {
   int menuChoice, quitMenu = FALSE;
@@ -32,7 +21,7 @@ int main() {
 
     switch (menuChoice) {
       case INSERT:
-        printf("\nInserting Data\n");
+        testFunction();
         break;
 
       case REMOVE:
@@ -48,7 +37,7 @@ int main() {
         break;
 
       case LOAD_FILES:
-        readDataFile(openFile(DATA_FILE_PATH, "r"));
+        readDataFile(openFile(DATA_FILE_PATH, READ_BIN));
         break;
 
       case QUIT:

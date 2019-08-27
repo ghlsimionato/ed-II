@@ -1,11 +1,13 @@
-#ifndef IO
+#ifndef IO_H
 
-#define IO
+#define IO_H
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "structs.h"
+#include "constants.h"
 
 #define REG_SIZE 137
 

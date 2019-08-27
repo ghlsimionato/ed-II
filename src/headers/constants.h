@@ -16,6 +16,8 @@
 #define READ_WRITE_BIN "rb+"
 #define WRITE_READ_BIN "wb+"
 
+#define STR_MATCH 0
+
 #define TRUE 1
 #define FALSE 0
 

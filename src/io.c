@@ -10,8 +10,8 @@ FILE * openFile(char * fileName, char * fileMode) {
   if (fPointer == NULL) {
     // printf("\n[ERR]: filename=%s not found", fileName);
 
-    if (strcmp(fileMode, READ_WRITE_BIN)) {
-      printf("\nCreating file\n");
+    if (strcmp(fileMode, READ_WRITE_BIN) == STR_MATCH) {
+      // printf("\n[LOG] File not found, creating file\n");
       fPointer = fopen(fileName, WRITE_READ_BIN);
 
       return fPointer;

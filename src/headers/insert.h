@@ -2,6 +2,7 @@
 
 #include "io.h"
 #include "constants.h"
+#include "env.h"
 #include "structs.h"
 
 void testFunction();

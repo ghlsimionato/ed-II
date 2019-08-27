@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "structs.h"
+#include "env.h"
 #include "constants.h"
 
 #define REG_SIZE 137

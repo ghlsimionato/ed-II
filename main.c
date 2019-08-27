@@ -1,49 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#include "io.h"
+#include "structs.h"
 
 #define INSERT 1
 #define REMOVE 2
+#define COMPACT_FILE 3
+#define DUMP_FILE 4
+#define LOAD_FILES 5
 #define QUIT 0
+
+#define DATA_FILE_PATH "./data/insere.bin"
+#define OUTPUT_FILE_PATH "./build/main_file.bin"
 
 #define TRUE 1
 #define FALSE 0
 
-struct Register {
-  char id[3], name[50], insurance[50], type[50];
-};
-
-struct Register readData(FILE * input);
-int insertData(FILE* input, struct Register inputData);
-int removeData(FILE* input, int byteOffset);
-int compactFile();
-
-int firstFit();
-
 int main() {
-  FILE * input = fopen("./data/insere.bin", "r+");
-  struct Register registerInstance;
   int menuChoice, quitMenu = FALSE;
-
-  if (input == NULL) {
-    printf("\nData file not found/recognized\n");
-
-    return 1;
-  }
-
-  registerInstance = readData(input);
-  printf("%s", registerInstance.id);
+  struct Header head;
+  head.offest = 55;
 
   do {
-    printf("\n1. Insert\n2. Remove\n0. Quit\n");
+    printf("\nMAIN MENU:\n");
+    printf("\n\t1. Insert data");
+    printf("\n\t2. Remove by ID");
+    printf("\n\t3. Compact file");
+    printf("\n\t4. Hex dump file");
+    printf("\n\t5. Load files");
+    printf("\n\t0. Quit\n");
     scanf("%d", &menuChoice);
 
     switch (menuChoice) {
       case INSERT:
-        insertData(input, registerInstance);
+        printf("\nInserting Data\n");
+        updateHeader(head, openFile(OUTPUT_FILE_PATH, "w+"));
+        head = getFileHeader(openFile(OUTPUT_FILE_PATH, "r"));
+        printf("head.offset=%d", head.offest);
         break;
 
       case REMOVE:
         printf("\nRemoving data\n");
+        break;
+
+      case COMPACT_FILE:
+        printf("\nCompacting file\n");
+        break;
+      
+      case DUMP_FILE:
+        printf("\nDumping file\n");
+        break;
+
+      case LOAD_FILES:
+        readDataFile(openFile(DATA_FILE_PATH, "r"));
         break;
 
       case QUIT:
@@ -57,16 +68,4 @@ int main() {
   } while (quitMenu == FALSE);
 
   return 0;
-}
-
-int insertData(FILE* input, struct Register inputData) {
-  return 1;
-}
-
-struct Register readData(FILE * input) {
-  struct Register data;
-
-  fread(&data, sizeof(char), 153, input);
-
-  return data;
 }

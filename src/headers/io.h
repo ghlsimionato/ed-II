@@ -11,7 +11,7 @@
 
 FILE * openFile(char * fileName, char * fileMode);
 struct Register * readDataFile(FILE * dataFile);
-void updateHeader(struct Header headerData, FILE * outputFile);
+void updateFileHeader(struct Header headerData, FILE * outputFile);
 struct Header getFileHeader(FILE * fPointer);
 
 #endif

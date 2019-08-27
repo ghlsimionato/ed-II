@@ -37,7 +37,7 @@ struct Register * readDataFile(FILE * dataFile) {
   return buffer;
 }
 
-void updateHeader(struct Header headerData, FILE * outputFile) {
+void updateFileHeader(struct Header headerData, FILE * outputFile) {
   rewind(outputFile);
   fwrite(&headerData, sizeof (struct Header), 1, outputFile);
 }

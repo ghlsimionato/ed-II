@@ -9,7 +9,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceRoot}/build/insurance-reg",
-      "args": ["-g"],
+      "args": ["debug", "test"],
       "stopAtEntry": false,
       "cwd": "${workspaceRoot}",
       "environment": [],

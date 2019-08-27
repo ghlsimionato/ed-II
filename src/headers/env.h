@@ -1,10 +1,10 @@
 #ifndef ENV_H
 #define ENV_H
 
-#include "constants.h"
-
 #include <string.h>
 #include <stdio.h>
+
+#include "constants.h"
 
 extern int debug;
 

@@ -1,8 +1,4 @@
-#ifndef IO
-
-#define IO
-
-#include "io.h"
+#include "./headers/io.h"
 
 FILE * openFile(char * fileName, char * fileMode) {
   FILE * fPointer;
@@ -50,5 +46,3 @@ struct Header getFileHeader(FILE * fPointer) {
   fread(&fileHeader, sizeof (struct Header), 1, fPointer);
   return fileHeader;
 }
-
-#endif

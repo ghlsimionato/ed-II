@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "io.h"
-#include "structs.h"
+#include "./headers/io.h"
+#include "./headers/structs.h"
 
 #define INSERT 1
 #define REMOVE 2

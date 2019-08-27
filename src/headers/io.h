@@ -1,3 +1,7 @@
+#ifndef IO
+
+#define IO
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,3 +13,5 @@ FILE * openFile(char * fileName, char * fileMode);
 struct Register * readDataFile(FILE * dataFile);
 void updateHeader(struct Header headerData, FILE * outputFile);
 struct Header getFileHeader(FILE * fPointer);
+
+#endif

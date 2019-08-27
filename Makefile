@@ -1,28 +1,22 @@
-# For multiple files:
-# myprogam: main.o foo.o
-#     gcc -o myprogram main.o foo.o
-
-# main.o: main.c foo.h
-#     gcc -c main.c
-
-# foo.o: foo.c foo.h
-#     gcc -c foo.c
-
+CC = gcc
 CFLAGS = -W -Wall -pedantic
-SRCDIR = src
-BUILDIR = build
-DEPS = structs.h
+
+SRCDIR = ./src
+BUILDIR = ./build
+OBJDIR = ./obj
+
 SRC = main.c
 
-buildprogram: main.o io.o
-	@echo "Building main program"
-	gcc -o ./build/main-prog main.o io.o
+buildprogram: $(OBJDIR)/main.o $(OBJDIR)/io.o
+	@echo "\nBuilding main program\n"
+	gcc -o ./build/main-prog $(OBJDIR)/main.o $(OBJDIR)/io.o
+	@echo "\nBuild completed!\n"
 
-main.o:	${SRC}
-	gcc -o main.o -c $(SRC) $(CFLAGS)
+$(OBJDIR)/main.o:	$(SRCDIR)/${SRC}
+	gcc -o $(OBJDIR)/main.o -c $(SRCDIR)/$(SRC) $(CFLAGS)
 
-io.o: io.c io.h
-	gcc -o io.o -c io.c $(CFLAGS)
+$(OBJDIR)/io.o: $(SRCDIR)/io.c $(SRCDIR)/headers/io.h
+	gcc -o $(OBJDIR)/io.o -c $(SRCDIR)/io.c $(CFLAGS)
 
 clean:
 	rm -f *o	

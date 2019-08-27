@@ -13,6 +13,7 @@ FILE * openFile(char * fileName, char * fileMode) {
     if (strcmp(fileMode, READ_WRITE_BIN) == STR_MATCH) {
       // printf("\n[LOG] File not found, creating file\n");
       fPointer = fopen(fileName, WRITE_READ_BIN);
+      initializeFile(fPointer);
 
       return fPointer;
     }
@@ -23,6 +24,15 @@ FILE * openFile(char * fileName, char * fileMode) {
   // printf("\nFile %s found for mode %s\n", fileName, fileMode);
 
   return fPointer;
+}
+
+int initializeFile(FILE * outputFile) {
+  struct Header headerToSet;
+  headerToSet.offest = -1;
+
+  updateFileHeader(headerToSet, outputFile);
+
+  return 0;
 }
 
 long getFileSize(FILE * fPointer) {
@@ -55,6 +65,7 @@ void updateFileHeader(struct Header headerData, FILE * outputFile) {
 struct Header getFileHeader(FILE * fPointer) {
   struct Header fileHeader;
 
+  rewind(fPointer);
   fread(&fileHeader, sizeof (struct Header), 1, fPointer);
   return fileHeader;
 }

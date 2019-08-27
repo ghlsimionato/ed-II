@@ -5,8 +5,9 @@
 #include "./headers/constants.h"
 #include "./headers/insert.h"
 
-int main(int argc, char ** argv) {
+int main() {
   int menuChoice, quitMenu = FALSE;
+  struct Register * test;
 
   do {
     printf("\nMAIN MENU:\n");
@@ -37,7 +38,8 @@ int main(int argc, char ** argv) {
         break;
 
       case LOAD_FILES:
-        readDataFile(openFile(DATA_FILE_PATH, READ_BIN));
+        test = readDataFile(openFile(DATA_FILE_PATH, READ_BIN));
+        insertRegister(test[0]);
         break;
 
       case QUIT:

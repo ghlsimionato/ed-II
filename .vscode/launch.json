@@ -5,13 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "gcc build and debug active file",
+      "name": "make and debug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${fileDirname}/${fileBasenameNoExtension}",
-      "args": [],
+      "program": "${workspaceRoot}/build/insurance-reg",
+      "args": ["-g"],
       "stopAtEntry": true,
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceRoot}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
@@ -20,9 +20,13 @@
           "description": "Enable pretty-printing for gdb",
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
-        }
+        },
+        {
+          "description": "Additional libs for gdb",
+          "text": "set solib-search-path sharedLibraryPath/lib"
+      }
       ],
-      "preLaunchTask": "gcc build active file",
+      "preLaunchTask": "make main file",
       "miDebuggerPath": "/usr/bin/gdb"
     }
   ]

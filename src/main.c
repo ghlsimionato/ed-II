@@ -18,10 +18,8 @@
 #define TRUE 1
 #define FALSE 0
 
-int main() {
+int main(int argc, char ** argv) {
   int menuChoice, quitMenu = FALSE;
-  struct Header head;
-  head.offest = 55;
 
   do {
     printf("\nMAIN MENU:\n");
@@ -30,15 +28,16 @@ int main() {
     printf("\n\t3. Compact file");
     printf("\n\t4. Hex dump file");
     printf("\n\t5. Load files");
-    printf("\n\t0. Quit\n");
+    printf("\n\t0. Quit\n\n");
+    printf("\tInsert option: ");
     scanf("%d", &menuChoice);
 
     switch (menuChoice) {
       case INSERT:
         printf("\nInserting Data\n");
-        updateHeader(head, openFile(OUTPUT_FILE_PATH, "w+"));
-        head = getFileHeader(openFile(OUTPUT_FILE_PATH, "r"));
-        printf("head.offset=%d", head.offest);
+        // updateHeader(head, openFile(OUTPUT_FILE_PATH, "w+"));
+        // head = getFileHeader(openFile(OUTPUT_FILE_PATH, "r"));
+        // printf("head.offset=%d", head.offest);
         break;
 
       case REMOVE:

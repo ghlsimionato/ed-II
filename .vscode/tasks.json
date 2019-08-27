@@ -4,43 +4,16 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "make main file",
       "type": "shell",
-      "label": "gcc build active file",
-      "command": "/usr/bin/gcc",
-      "args": [
-        "-g",
-        "-Wall",
-        "${file}",
-        "-o",
-        "${fileDirname}/${fileBasenameNoExtension}"
-      ],
-      "options": {
-        "cwd": "/usr/bin"
-      },
-      "problemMatcher": {
-        "owner": "cpp",
-        "fileLocation": ["relative", "${workspaceRoot}"],
-        "pattern": {
-            "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-            "file": 1,
-            "line": 2,
-            "column": 3,
-            "severity": 4,
-            "message": 5
-        }
-      }
-    },
-    {
-      "label": "build main",
-      "type": "shell",
-      "command": "make buildprogram",
+      "command": "make build",
       "group": {
         "kind": "build",
         "isDefault": true
       },
       "presentation": {
-          "reveal": "always",
-          "panel": "new"
+        "reveal": "always",
+        "panel": "new"
       },
       "problemMatcher": [
           "$gcc"

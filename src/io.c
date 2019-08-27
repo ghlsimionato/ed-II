@@ -26,10 +26,12 @@ long getFileSize(FILE * fPointer) {
 struct Register * readDataFile(FILE * dataFile) {
   struct Register * buffer;
   long buffSize = getFileSize(dataFile);
+  int registerSize = sizeof (struct Register);
+  int numOfRegsToRead = buffSize / registerSize;
 
   buffer = malloc(buffSize);
 
-  fread(buffer, sizeof (struct Register), 5, dataFile);
+  fread(buffer, registerSize, numOfRegsToRead, dataFile);
   fclose(dataFile);
 
   return buffer;

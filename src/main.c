@@ -33,9 +33,6 @@ int main() {
     switch (menuChoice) {
       case INSERT:
         printf("\nInserting Data\n");
-        // updateHeader(head, openFile(OUTPUT_FILE_PATH, "w+"));
-        // head = getFileHeader(openFile(OUTPUT_FILE_PATH, "r"));
-        // printf("head.offset=%d", head.offest);
         break;
 
       case REMOVE:

@@ -3,13 +3,10 @@
 #include "./headers/io.h"
 #include "./headers/structs.h"
 #include "./headers/constants.h"
-#include "./headers/env.h"
 #include "./headers/insert.h"
 
 int main(int argc, char ** argv) {
   int menuChoice, quitMenu = FALSE;
-
-  setEnvVars(argc, argv);
 
   do {
     printf("\nMAIN MENU:\n");

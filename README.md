@@ -2,7 +2,7 @@
 C Projects for Data Structure class
 
 # Deps
-It is suggested to install the `build-essential` (use apt-get or your dist package manager)
+It is suggested to install the `build-essential` package (contains gcc, gdb and all the essential build tools) (use apt-get or your dist package manager)
 
 # Build
 To build the project run `make build`
@@ -37,3 +37,4 @@ Else, use gdb with the path to the executable `gdb ./build/insurance-reg`
 - improve make clean
 - add .PHONY
 - makefile create build dir if it doesn't exist (the executable should not be commited)
+- create logger function that checks env variables to log

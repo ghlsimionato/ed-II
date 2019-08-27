@@ -31,3 +31,9 @@ Else, use gdb with the path to the executable `gdb ./build/insurance-reg`
 4. Properly load from file
   -Load all the data into a struct array and insert one by one (each register can be skipped if user wants)
   - ?Mark loaed register as "loaded" ? (Not sure if this is required)
+
+#Quality-Of-Life Improvements
+- gitignore build folder
+- improve make clean
+- add .PHONY
+- makefile create build dir if it doesn't exist (the executable should not be commited)

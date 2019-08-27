@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -W -Wall -pedantic
+CFLAGS = -W -Wall -pedantic -g
 
 SRCDIR = ./src
 BUILDIR = ./build
@@ -9,7 +9,7 @@ SRC = main.c
 
 build: $(OBJDIR)/main.o $(OBJDIR)/io.o
 	@echo "\nBuilding main program\n"
-	$(CC) -o ./build/insurance-reg $(OBJDIR)/main.o $(OBJDIR)/io.o
+	$(CC) -o ./build/insurance-reg $(OBJDIR)/main.o $(OBJDIR)/io.o -g
 	@echo "\nBuild completed!\n"
 
 $(OBJDIR)/main.o:	$(SRCDIR)/${SRC}

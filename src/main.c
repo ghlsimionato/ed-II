@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "./headers/io.h"
 #include "./headers/structs.h"
@@ -18,7 +16,7 @@
 #define TRUE 1
 #define FALSE 0
 
-int main(int argc, char ** argv) {
+int main() {
   int menuChoice, quitMenu = FALSE;
 
   do {

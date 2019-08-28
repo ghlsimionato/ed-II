@@ -3,9 +3,10 @@
 
 #include "io.h"
 #include "constants.h"
+#include "utils.h"
 #include "structs.h"
 
-void testFunction();
+struct Register getInputFromUser();
 int getRegisterSize(struct Register input);
 void formatData(char * buffer, struct Register dataToFormat);
 void insertRegister(struct Register dataToInsert);

@@ -1,11 +1,30 @@
 #include "./headers/insert.h"
 
-void testFunction() {
-  printf("\nTesting\n");
-  FILE * fPointer = openFile(OUTPUT_FILE_PATH, READ_WRITE_BIN);
+struct Register getInputFromUser() {
+  struct Register input;
+  char buffer[60];
 
-  initializeFile(fPointer);
-  fclose(fPointer);
+  printf("\nRegister new user information\n");
+
+  cleanStdin();
+  printf("ID: ");
+  if (fgets(buffer, 4, stdin)) {
+    strtok(buffer, '\n');
+    strcpy(input.id, buffer);
+  }
+
+  printf("Name: ");
+  fgets(input.name, 50, stdin);
+
+  printf("Insurance: ");
+  fgets(input.insurance, 50, stdin);
+
+  printf("Insurance type: ");
+  fgets(input.insuranceType, 30, stdin);
+
+  printf("\nUSER TO INSERT: %s %s %s %s\n", input.id, input.name, input.insurance, input.insuranceType);
+
+  return input;
 }
 
 int getRegisterSize(struct Register input) {

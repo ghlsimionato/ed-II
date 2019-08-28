@@ -12,9 +12,9 @@ $(shell mkdir -p $(OBJDIR))
 
 # TODO: More generic makefile
 
-build: $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o $(OBJDIR)/remove.o
+build: $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o $(OBJDIR)/remove.o $(OBJDIR)/utils.o
 	@echo "\nBuilding main program\n"
-	$(CC) -o ./build/insurance-reg $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o $(OBJDIR)/remove.o -g
+	$(CC) -o ./build/insurance-reg $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o $(OBJDIR)/remove.o $(OBJDIR)/utils.o -g
 	@echo "\nBuild completed!\n"
 
 $(OBJDIR)/main.o:	$(SRCDIR)/${SRC}
@@ -28,6 +28,9 @@ $(OBJDIR)/insert.o: $(SRCDIR)/insert.c $(SRCDIR)/headers/insert.h
 
 $(OBJDIR)/remove.o: $(SRCDIR)/remove.c $(SRCDIR)/headers/remove.h
 	$(CC) -o $(OBJDIR)/remove.o -c $(SRCDIR)/remove.c $(CFLAGS)
+
+$(OBJDIR)/utils.o: $(SRCDIR)/utils.c $(SRCDIR)/headers/utils.h
+	$(CC) -o $(OBJDIR)/utils.o -c $(SRCDIR)/utils.c $(CFLAGS)	
 
 # TODO: make a decent clean
 

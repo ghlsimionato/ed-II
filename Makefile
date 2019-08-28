@@ -8,6 +8,7 @@ OBJDIR = ./obj
 SRC = main.c
 
 $(shell mkdir -p $(BUILDIR))
+$(shell mkdir -p $(OBJDIR))
 
 # TODO: More generic makefile
 
@@ -31,9 +32,9 @@ $(OBJDIR)/remove.o: $(SRCDIR)/remove.c $(SRCDIR)/headers/remove.h
 # TODO: make a decent clean
 
 clean-obj:
-	rm -f ./obj
+	rm -rf ./obj
 
 clean-build:
-	rm -f ./build
+	rm -rf ./build
 
 clean: clean-obj clean-build

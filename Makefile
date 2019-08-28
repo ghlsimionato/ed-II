@@ -7,9 +7,11 @@ OBJDIR = ./obj
 
 SRC = main.c
 
-build: $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o
+$(shell mkdir -p $(BUILDIR))
+
+build: $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o $(OBJDIR)/remove.o
 	@echo "\nBuilding main program\n"
-	$(CC) -o ./build/insurance-reg $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o -g
+	$(CC) -o ./build/insurance-reg $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o $(OBJDIR)/remove.o -g
 	@echo "\nBuild completed!\n"
 
 $(OBJDIR)/main.o:	$(SRCDIR)/${SRC}
@@ -20,6 +22,9 @@ $(OBJDIR)/io.o: $(SRCDIR)/io.c $(SRCDIR)/headers/io.h
 
 $(OBJDIR)/insert.o: $(SRCDIR)/insert.c $(SRCDIR)/headers/insert.h
 	$(CC) -o $(OBJDIR)/insert.o -c $(SRCDIR)/insert.c $(CFLAGS)
+
+$(OBJDIR)/remove.o: $(SRCDIR)/remove.c $(SRCDIR)/headers/remove.h
+	$(CC) -o $(OBJDIR)/remove.o -c $(SRCDIR)/remove.c $(CFLAGS)
 
 #TODO: make a decent clean
 

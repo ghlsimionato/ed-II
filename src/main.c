@@ -26,6 +26,7 @@ int main() {
         break;
 
       case REMOVE:
+        readFileRegisters();
         printf("\nRemoving data\n");
         break;
 
@@ -39,7 +40,10 @@ int main() {
 
       case LOAD_FILES:
         test = readDataFile(openFile(DATA_FILE_PATH, READ_BIN));
-        insertRegister(test[0]);
+        // int regCount = sizeof (*test) / sizeof (struct Register);
+        for (int i = 0; i < 8; i++) {
+          insertRegister(test[i]);
+        }
         break;
 
       case QUIT:

@@ -12,7 +12,7 @@
 
 /* Paths */
 #define DATA_FILE_PATH "./data/input/insere.bin"
-#define OUTPUT_FILE_PATH "./data/output_file.bin"
+#define OUTPUT_FILE_PATH "./build/output_file.bin"
 
 /* File modes */
 #define READ_BIN "rb"

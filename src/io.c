@@ -69,3 +69,19 @@ struct Header getFileHeader(FILE * fPointer) {
   fread(&fileHeader, sizeof (struct Header), 1, fPointer);
   return fileHeader;
 }
+
+void readFileRegisters() {
+  FILE * test = openFile(OUTPUT_FILE_PATH, READ_BIN);
+  char buffer[255];
+  int sizes, i;
+
+  fread(&sizes, sizeof(int), 1, test);
+  for (i = 0; i < 8; i++) {
+    fread(&sizes, sizeof(int), 1, test);
+    printf("\nSize = %d", sizes);
+    fread(buffer, sizes, 1, test);
+    printf(" Buffer = %s\n", buffer);
+  }
+
+}
+

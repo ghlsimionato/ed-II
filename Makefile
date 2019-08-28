@@ -9,6 +9,8 @@ SRC = main.c
 
 $(shell mkdir -p $(BUILDIR))
 
+# TODO: More generic makefile
+
 build: $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o $(OBJDIR)/remove.o
 	@echo "\nBuilding main program\n"
 	$(CC) -o ./build/insurance-reg $(OBJDIR)/main.o $(OBJDIR)/io.o $(OBJDIR)/insert.o $(OBJDIR)/remove.o -g
@@ -26,15 +28,12 @@ $(OBJDIR)/insert.o: $(SRCDIR)/insert.c $(SRCDIR)/headers/insert.h
 $(OBJDIR)/remove.o: $(SRCDIR)/remove.c $(SRCDIR)/headers/remove.h
 	$(CC) -o $(OBJDIR)/remove.o -c $(SRCDIR)/remove.c $(CFLAGS)
 
-#TODO: make a decent clean
+# TODO: make a decent clean
 
-clean:
-	rm -f ./obj/*.o	
+clean-obj:
+	rm -f ./obj
 
 clean-build:
-	rm -f ./build/*
+	rm -f ./build
 
-clean-data:
-	rm -f ./data/output_file.bin
-
-clean-all: clean clean-build clean-data
+clean: clean-obj clean-build

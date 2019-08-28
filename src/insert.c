@@ -2,27 +2,32 @@
 
 struct Register getInputFromUser() {
   struct Register input;
-  char buffer[60];
+  char * buffer;
 
   printf("\nRegister new user information\n");
 
   cleanStdin();
   printf("ID: ");
-  if (fgets(buffer, 4, stdin)) {
-    strtok(buffer, '\n');
-    strcpy(input.id, buffer);
-  }
+  buffer = getStringFromUser(4);
+  strcpy(input.id, buffer);
+  free(buffer);
 
   printf("Name: ");
-  fgets(input.name, 50, stdin);
+  buffer = getStringFromUser(50);
+  strcpy(input.name, buffer);
+  free(buffer);  
 
   printf("Insurance: ");
-  fgets(input.insurance, 50, stdin);
+  buffer = getStringFromUser(50);
+  strcpy(input.insurance, buffer);
+  free(buffer);  
 
   printf("Insurance type: ");
-  fgets(input.insuranceType, 30, stdin);
+  buffer = getStringFromUser(30);
+  strcpy(input.insuranceType, buffer);
+  free(buffer); 
 
-  printf("\nUSER TO INSERT: %s %s %s %s\n", input.id, input.name, input.insurance, input.insuranceType);
+  printf("\n[USER TO INSERT]: %s %s %s %s\n", input.id, input.name, input.insurance, input.insuranceType);
 
   return input;
 }

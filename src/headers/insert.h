@@ -7,6 +7,7 @@
 #include "structs.h"
 
 struct Register getInputFromUser();
+int handleUserInsert();
 int getRegisterSize(struct Register input);
 void formatData(char * buffer, struct Register dataToFormat);
 void insertRegister(struct Register dataToInsert);

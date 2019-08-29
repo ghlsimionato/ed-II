@@ -9,8 +9,6 @@
 #include "structs.h"
 #include "constants.h"
 
-#define REG_SIZE 137
-
 FILE * openFile(char * fileName, char * fileMode);
 int initializeFile(FILE * outputFile);
 struct Register * readDataFile(FILE * dataFile);

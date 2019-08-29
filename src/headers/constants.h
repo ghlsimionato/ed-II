@@ -26,4 +26,7 @@
 #define TRUE 1
 #define FALSE 0
 
+/* Registers */
+#define REG_SIZE 137
+
 #endif

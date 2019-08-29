@@ -22,7 +22,7 @@ int main() {
 
     switch (menuChoice) {
       case INSERT:
-        getInputFromUser();
+        handleUserInsert();
         break;
 
       case REMOVE:

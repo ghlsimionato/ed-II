@@ -32,6 +32,14 @@ struct Register getInputFromUser() {
   return input;
 }
 
+int handleUserInsert() {
+  struct Register input = getInputFromUser();
+
+  insertRegister(input);
+
+  return TRUE;
+}
+
 int getRegisterSize(struct Register input) {
   int sizeSum;
 
@@ -45,8 +53,10 @@ void formatData(char * buffer, struct Register dataToFormat) {
 
 void insertRegister(struct Register dataToInsert) {
   struct Header fileHeader;
+
   int sizeToAllocate = getRegisterSize(dataToInsert) + 3*sizeof(char);
   char * buffer = malloc(sizeToAllocate);
+
   formatData(buffer, dataToInsert);
   
   FILE * outputFile = openFile(OUTPUT_FILE_PATH, READ_WRITE_BIN);
@@ -54,13 +64,33 @@ void insertRegister(struct Register dataToInsert) {
 
   int registerSize = sizeToAllocate + 1;
 
+
   if (fileHeader.offest == -1) {
     fseek(outputFile, 0 ,SEEK_END);
     fwrite(&registerSize, sizeof (int), 1, outputFile);
     fwrite(buffer, registerSize, 1, outputFile);
+  } else {
+    findFirstFit(outputFile, fileHeader.offest, registerSize);
+  }
 
-    fclose(outputFile);
+  fclose(outputFile);
+  return;
+}
 
+void findFirstFit(FILE * outputFile, int offset, int registerSize) {
+  if (offset == -1) {
     return;
   }
+  int availableSpace;
+  fseek(outputFile, offset, SEEK_CUR);
+  fread(&availableSpace, sizeof(int), 1, outputFile);
+
+  if (availableSpace < registerSize) {
+    int nextOffset;
+
+    fread(&nextOffset, sizeof(int), 1, outputFile);
+    findFirstFit(outputFile, nextOffset, registerSize);
+  }
+
+  return;
 }

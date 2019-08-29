@@ -21,9 +21,9 @@ Else, use gdb with the path to the executable `gdb ./build/insurance-reg`
 
 # TODO
 1. Create insert function
-  - Need to create separators for each register inserted (somewhat done)
-  - Iterate through available spots list
-  - first-fit logic
+  - ~~Need to create separators for each register inserted (somewhat done)~~
+  - ~~Iterate through available spots list~~
+  - ~~first-fit logic~~
 2. Create delete function
   - Mark space to be reused
   - Update file header with offset to deleted register

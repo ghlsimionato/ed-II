@@ -3,15 +3,15 @@
 FILE * openFile(char * fileName, char * fileMode) {
   FILE * fPointer;
 
-  // printf("\n[LOG] filename=%s filemode=%s\n", fileName, fileMode);
+  printf("\n[LOG] filename=%s filemode=%s\n", fileName, fileMode);
 
   fPointer = fopen(fileName, fileMode);
 
   if (fPointer == NULL) {
-    // printf("\n[ERR]: filename=%s not found", fileName);
+    printf("\n[ERR]: filename=%s not found", fileName);
 
     if (strcmp(fileMode, READ_WRITE_BIN) == STR_MATCH) {
-      // printf("\n[LOG] File not found, creating file\n");
+      printf("\n[LOG] File not found, creating file\n");
       fPointer = fopen(fileName, WRITE_READ_BIN);
       initializeFile(fPointer);
 
@@ -21,7 +21,7 @@ FILE * openFile(char * fileName, char * fileMode) {
     return NULL;
   }
 
-  // printf("\nFile %s found for mode %s\n", fileName, fileMode);
+  printf("\nFile %s found for mode %s\n", fileName, fileMode);
 
   return fPointer;
 }

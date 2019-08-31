@@ -4,9 +4,11 @@
 #include "./headers/structs.h"
 #include "./headers/constants.h"
 #include "./headers/insert.h"
+#include "./headers/remove.h"
 
 int main() {
   int menuChoice, quitMenu = FALSE;
+  char * string;
   struct Register * test;
 
   do {
@@ -26,7 +28,10 @@ int main() {
         break;
 
       case REMOVE:
-        readFileRegisters();
+        // readFileRegisters();
+        // string = getStringFromUser(4);
+        removeRegister(getStringFromUser(4));
+
         printf("\nRemoving data\n");
         break;
 
@@ -44,6 +49,7 @@ int main() {
         for (int i = 0; i < 8; i++) {
           insertRegister(test[i]);
         }
+        free(test);
         break;
 
       case QUIT:

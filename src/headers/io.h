@@ -14,6 +14,7 @@ int initializeFile(FILE * outputFile);
 struct Register * readDataFile(FILE * dataFile);
 void updateFileHeader(struct Header headerData, FILE * outputFile);
 struct Header getFileHeader(FILE * fPointer);
+struct Register * readFileRegister(FILE * outputFile);
 void readFileRegisters();
 
 #endif

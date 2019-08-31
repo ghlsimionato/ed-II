@@ -73,6 +73,8 @@ void insertRegister(struct Register dataToInsert) {
     findFirstFit(outputFile, fileHeader.offest, registerSize);
   }
 
+  free(buffer);
+
   fclose(outputFile);
   return;
 }
@@ -90,7 +92,7 @@ void findFirstFit(FILE * outputFile, int offset, int registerSize) {
 
     fread(&nextOffset, sizeof(int), 1, outputFile);
     findFirstFit(outputFile, nextOffset, registerSize);
-  }
+  }  
 
   return;
 }

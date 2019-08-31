@@ -70,6 +70,34 @@ struct Header getFileHeader(FILE * fPointer) {
   return fileHeader;
 }
 
+struct Register * readFileRegister(FILE * outputFile) {
+  int registerSize;
+  struct Register * dataRead;
+  dataRead = malloc(sizeof (struct Register));
+  char * tkn;
+  char * buffer;
+
+  if (fread(&registerSize, sizeof(int), 1, outputFile)) {
+    buffer = malloc(registerSize);
+    fread(buffer, registerSize, 1, outputFile);
+    printf("\nBUFFER %s\n", buffer);
+    tkn = strtok(buffer, "#");
+    strcpy(dataRead->id, tkn);
+    tkn = strtok(NULL, "#");
+    strcpy(dataRead->name, tkn);
+    tkn = strtok(NULL, "#");
+    strcpy(dataRead->insurance, tkn);
+    tkn = strtok(NULL, "#");
+    strcpy(dataRead->insuranceType, tkn);
+
+    free(buffer);
+
+    return dataRead;
+  }
+
+  return NULL;
+}
+
 void readFileRegisters() {
   FILE * test = openFile(OUTPUT_FILE_PATH, READ_BIN);
   char buffer[255];

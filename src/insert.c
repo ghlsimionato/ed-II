@@ -8,22 +8,22 @@ struct Register getInputFromUser() {
 
   cleanStdin();
   printf("ID: ");
-  buffer = getStringFromUser(4);
+  buffer = getStringFromUser(5);
   strcpy(input.id, buffer);
   free(buffer);
 
   printf("Name: ");
-  buffer = getStringFromUser(50);
+  buffer = getStringFromUser(51);
   strcpy(input.name, buffer);
   free(buffer);  
 
   printf("Insurance: ");
-  buffer = getStringFromUser(50);
+  buffer = getStringFromUser(51);
   strcpy(input.insurance, buffer);
   free(buffer);  
 
   printf("Insurance type: ");
-  buffer = getStringFromUser(30);
+  buffer = getStringFromUser(31);
   strcpy(input.insuranceType, buffer);
   free(buffer); 
 

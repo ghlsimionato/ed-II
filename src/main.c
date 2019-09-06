@@ -40,7 +40,7 @@ int main() {
         break;
       
       case DUMP_FILE:
-        printf("\nDumping file\n");
+        dumpFile(DATA_FILE_PATH, READ_WRITE_BIN);
         break;
 
       case LOAD_FILES:

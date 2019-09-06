@@ -6,5 +6,5 @@
 
 int getRegisterOffset(FILE * outputFile, char * id);
 void writeDeleteInformation(FILE * outputFile, int offset);
-struct Register * searchForId(FILE * outputFile, FILE * prevLocation, char * id);
+struct DeleteRegister * searchForId(FILE * outputFile, char * id);
 void removeRegister(char * id);

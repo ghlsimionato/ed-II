@@ -70,10 +70,12 @@ struct Header getFileHeader(FILE * fPointer) {
   return fileHeader;
 }
 
-struct Register * readFileRegister(FILE * outputFile) {
+struct DeleteRegister * readFileRegister(FILE * outputFile) {
   int registerSize;
-  struct Register * dataRead;
-  dataRead = malloc(sizeof (struct Register));
+  struct DeleteRegister * dataToDelete;
+  // struct Register * dataRead;
+  // dataRead = malloc(sizeof (struct Register));
+  dataToDelete = malloc(sizeof (struct DeleteRegister));
   char * tkn;
   char * buffer;
 
@@ -82,17 +84,20 @@ struct Register * readFileRegister(FILE * outputFile) {
     fread(buffer, registerSize, 1, outputFile);
     printf("\nBUFFER %s\n", buffer);
     tkn = strtok(buffer, "#");
-    strcpy(dataRead->id, tkn);
+    strcpy(dataToDelete->data.id, tkn);
     tkn = strtok(NULL, "#");
-    strcpy(dataRead->name, tkn);
+    strcpy(dataToDelete->data.name, tkn);
     tkn = strtok(NULL, "#");
-    strcpy(dataRead->insurance, tkn);
+    strcpy(dataToDelete->data.insurance, tkn);
     tkn = strtok(NULL, "#");
-    strcpy(dataRead->insuranceType, tkn);
+    strcpy(dataToDelete->data.insuranceType, tkn);
+
+    // dataToDelete->data = dataRead;
+    dataToDelete->regSize = registerSize;
 
     free(buffer);
 
-    return dataRead;
+    return dataToDelete;
   }
 
   return NULL;
@@ -113,3 +118,31 @@ void readFileRegisters() {
 
 }
 
+void dumpFile(char * fileName, char * fileMode)
+{
+    FILE * fPointer;
+    fPointer = fopen(fileName, fileMode);
+    unsigned char buf[16];
+    int i;
+
+    printf("\n");
+    while(fread(buf, 1, sizeof(buf), fPointer) > 0)
+    {
+        for ( i = 0; i < sizeof(buf); i++)
+        {
+          printf("%02x ", buf[i]);
+        }
+
+        for ( i = 0; i < sizeof(buf); i++)
+        {
+          printf("%c", (buf[i] >= 32 && buf[i] <= 255 ? buf[i] : '.'));
+        }
+
+        for (i = 0; i < 16; i++)
+        {
+          buf[i] = 0;
+        }
+        
+        printf("\n");
+    }
+}

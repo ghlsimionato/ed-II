@@ -9,6 +9,8 @@
 #define DUMP_FILE 4
 #define LOAD_FILES 5
 #define QUIT 0
+/* Menu debug options */
+#define CHECK_SPACE_LIST 6
 
 /* Paths */
 #define DATA_FILE_PATH "./data/input/insere.bin"

@@ -1,42 +1,49 @@
 #include "./headers/remove.h"
 
-int getRegisterOffset(FILE * outputFile, char * id) {
-
-}
-
-void writeDeleteInformation(FILE * outputFile, int offset) {
-
-}
-
-struct Register * searchForId(FILE * outputFile, FILE * prevLocation, char * id) {
-  struct Register * fileData;
-  prevLocation = outputFile;
+struct DeleteRegister * searchForId(FILE * outputFile, char * id) {
+  struct DeleteRegister * fileData;
   fileData = readFileRegister(outputFile);
 
   if (fileData == NULL) {
-    printf("\nRegister not found\n");
     return NULL;
   }
 
-  if (strcmp(fileData->id, id) == STR_MATCH) {
+  // if regSize is 0, the data is marked for removal
+
+  if (fileData->regSize != 0 && strcmp(fileData->data.id, id) == STR_MATCH) {
     return fileData;
   }
 
-  return searchForId(outputFile, prevLocation ,id);
+  return searchForId(outputFile, id);
 }
 
 void removeRegister(char * id) {
   FILE * outputFile = openFile(OUTPUT_FILE_PATH, READ_WRITE_BIN);
-  FILE * prevLocation;
   struct Header header;
-  struct Register * fileData;
+  struct Header headerToWrite;
+  struct DeleteRegister * fileData;
 
-  header = getFileHeader(outputFile);
-  fileData = searchForId(outputFile, prevLocation ,id);
-  fseek(outputFile, SEEK_CUR, 5);
+  header = getFileHeader(outputFile); /* reads the header to advance file pointer and get offset */
+  fileData = searchForId(outputFile, id);
+
+  if (fileData == NULL) {
+    printf("\nRegister id = %s not found\n", id);
+    return;
+  }
+
+  int offsetToReturn = -(fileData->regSize + 4);
+
+  fseek(outputFile, offsetToReturn, SEEK_CUR);
+  headerToWrite.offest = ftell(outputFile);
+  fseek(outputFile, 4, SEEK_CUR);
+  fputc('*', outputFile);
+  fwrite(&(header.offest), sizeof(int), 1, outputFile);
+  updateFileHeader(headerToWrite, outputFile);
 
   free(fileData);
   free(id);
+
+  fclose(outputFile);
 
   return;
 }

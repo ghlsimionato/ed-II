@@ -13,17 +13,17 @@ struct Register getInputFromUser() {
   free(buffer);
 
   printf("Name: ");
-  buffer = getStringFromUser(50);
+  buffer = getStringFromUser(51);
   strcpy(input.name, buffer);
   free(buffer);  
 
   printf("Insurance: ");
-  buffer = getStringFromUser(50);
+  buffer = getStringFromUser(51);
   strcpy(input.insurance, buffer);
   free(buffer);  
 
   printf("Insurance type: ");
-  buffer = getStringFromUser(30);
+  buffer = getStringFromUser(31);
   strcpy(input.insuranceType, buffer);
   free(buffer); 
 
@@ -68,10 +68,11 @@ void insertRegister(struct Register dataToInsert) {
   if (fileHeader.offest == -1) {
     fseek(outputFile, 0 ,SEEK_END);
     fwrite(&registerSize, sizeof (int), 1, outputFile);
-    fwrite(buffer, registerSize, 1, outputFile);
   } else {
-    findFirstFit(outputFile, fileHeader.offest, registerSize);
+    findFirstFit(outputFile, fileHeader.offest, -1, registerSize);
   }
+
+  fwrite(buffer, registerSize, 1, outputFile);
 
   free(buffer);
 
@@ -79,20 +80,36 @@ void insertRegister(struct Register dataToInsert) {
   return;
 }
 
-void findFirstFit(FILE * outputFile, int offset, int registerSize) {
+void findFirstFit(FILE * outputFile, int offset, int prevOffset, int registerSize) {
   if (offset == -1) {
     return;
   }
+
+  char marker;
+  int nextOffset;
   int availableSpace;
+  // prevOffset = offset;
+
   fseek(outputFile, offset, SEEK_CUR);
   fread(&availableSpace, sizeof(int), 1, outputFile);
+  fread(&marker, sizeof (char), 1, outputFile);
+
+  if (marker != '*') {
+    printf("\n[ERR] Offset points to space NOT marked as available\n");
+    return;
+  }
+
+  fread(&nextOffset, sizeof(int), 1, outputFile);
+
+  // rewind to have file pointer on register size
+  int bytesToRewind = -(2*(sizeof (int)) + sizeof (char));
+  fseek(outputFile, bytesToRewind, SEEK_CUR);
 
   if (availableSpace < registerSize) {
-    int nextOffset;
+    findFirstFit(outputFile, nextOffset, prevOffset, registerSize);
 
-    fread(&nextOffset, sizeof(int), 1, outputFile);
-    findFirstFit(outputFile, nextOffset, registerSize);
-  }  
+    return;
+  }
 
   return;
 }

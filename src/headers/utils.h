@@ -6,7 +6,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "structs.h"
+#include "io.h"
+
 void cleanStdin();
 char * getStringFromUser(int len);
+void iterateThroughSpaceList(FILE * outputFile); // debug function
 
 #endif

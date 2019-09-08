@@ -8,7 +8,6 @@
 
 int main() {
   int menuChoice, quitMenu = FALSE;
-  char * string;
   struct Register * test;
 
   do {
@@ -30,6 +29,7 @@ int main() {
       case REMOVE:
         // readFileRegisters();
         // string = getStringFromUser(4);
+        cleanStdin();
         removeRegister(getStringFromUser(4));
 
         printf("\nRemoving data\n");
@@ -40,7 +40,7 @@ int main() {
         break;
       
       case DUMP_FILE:
-        printf("\nDumping file\n");
+        dumpFile(DATA_FILE_PATH, READ_WRITE_BIN);
         break;
 
       case LOAD_FILES:
@@ -55,6 +55,11 @@ int main() {
       case QUIT:
         printf("\nQuiting\n");
         quitMenu = TRUE;
+        break;
+
+      // Cases for testing
+      case CHECK_SPACE_LIST:
+        iterateThroughSpaceList(openFile(OUTPUT_FILE_PATH, READ_BIN));
         break;
 
       default:

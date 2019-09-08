@@ -3,17 +3,19 @@
 #include "constants.h"
 
 #define STRUCTS_H
+
+// Struct for the file Header
 struct Header {
   int offest;
 };
 
 struct Register {
-  char id[4], name[50], insurance[50], insuranceType[30];
+  char id[4], name[51], insurance[51], insuranceType[31];
 };
 
-struct FormatedRegister {
+struct DeleteRegister {
+  struct Register data;
   int regSize;
-  char * buffer;
 };
 
 #endif

@@ -57,6 +57,11 @@ int main() {
         quitMenu = TRUE;
         break;
 
+      // Cases for testing
+      case CHECK_SPACE_LIST:
+        iterateThroughSpaceList(openFile(OUTPUT_FILE_PATH, READ_BIN));
+        break;
+
       default:
         printf("\nInvalid Option\n");
     }

@@ -5,7 +5,6 @@ struct DeleteRegister * searchForId(FILE * outputFile, char * id) {
   fileData = readFileRegister(outputFile);
 
   if (fileData == NULL) {
-    printf("\nRegister not found\n");
     return NULL;
   }
 
@@ -28,19 +27,18 @@ void removeRegister(char * id) {
   fileData = searchForId(outputFile, id);
 
   if (fileData == NULL) {
+    printf("\nRegister id = %s not found\n", id);
     return;
   }
 
   int offsetToReturn = -(fileData->regSize + 4);
 
-  if (fileData != NULL) {
-    fseek(outputFile, offsetToReturn, SEEK_CUR);
-    headerToWrite.offest = ftell(outputFile);
-    fseek(outputFile, 4, SEEK_CUR);
-    fputc('*', outputFile);
-    fwrite(&(header.offest), sizeof(int), 1, outputFile);
-    updateFileHeader(headerToWrite, outputFile);
-  }
+  fseek(outputFile, offsetToReturn, SEEK_CUR);
+  headerToWrite.offest = ftell(outputFile);
+  fseek(outputFile, 4, SEEK_CUR);
+  fputc('*', outputFile);
+  fwrite(&(header.offest), sizeof(int), 1, outputFile);
+  updateFileHeader(headerToWrite, outputFile);
 
   free(fileData);
   free(id);

@@ -84,16 +84,31 @@ void findFirstFit(FILE * outputFile, int offset, int prevOffset, int registerSiz
   if (offset == -1) {
     return;
   }
+
+  char marker;
+  int nextOffset;
   int availableSpace;
+  // prevOffset = offset;
+
   fseek(outputFile, offset, SEEK_CUR);
   fread(&availableSpace, sizeof(int), 1, outputFile);
-  fseek(outputFile, -4, SEEK_CUR);
+  fread(&marker, sizeof (char), 1, outputFile);
+
+  if (marker != '*') {
+    printf("\n[ERR] Offset points to space NOT marked as available\n");
+    return;
+  }
+
+  fread(&nextOffset, sizeof(int), 1, outputFile);
+
+  // rewind to have file pointer on register size
+  int bytesToRewind = -(2*(sizeof (int)) + sizeof (char));
+  fseek(outputFile, bytesToRewind, SEEK_CUR);
 
   if (availableSpace < registerSize) {
-    int nextOffset;
+    findFirstFit(outputFile, nextOffset, prevOffset, registerSize);
 
-    fread(&nextOffset, sizeof(int), 1, outputFile);
-    findFirstFit(outputFile, nextOffset, prevOffset,registerSize);
+    return;
   }
 
   return;

@@ -8,7 +8,7 @@ struct Register getInputFromUser() {
 
   cleanStdin();
   printf("ID: ");
-  buffer = getStringFromUser(5);
+  buffer = getStringFromUser(4);
   strcpy(input.id, buffer);
   free(buffer);
 
@@ -68,10 +68,11 @@ void insertRegister(struct Register dataToInsert) {
   if (fileHeader.offest == -1) {
     fseek(outputFile, 0 ,SEEK_END);
     fwrite(&registerSize, sizeof (int), 1, outputFile);
-    fwrite(buffer, registerSize, 1, outputFile);
   } else {
-    findFirstFit(outputFile, fileHeader.offest, registerSize);
+    findFirstFit(outputFile, fileHeader.offest, -1, registerSize);
   }
+
+  fwrite(buffer, registerSize, 1, outputFile);
 
   free(buffer);
 
@@ -79,20 +80,21 @@ void insertRegister(struct Register dataToInsert) {
   return;
 }
 
-void findFirstFit(FILE * outputFile, int offset, int registerSize) {
+void findFirstFit(FILE * outputFile, int offset, int prevOffset, int registerSize) {
   if (offset == -1) {
     return;
   }
   int availableSpace;
   fseek(outputFile, offset, SEEK_CUR);
   fread(&availableSpace, sizeof(int), 1, outputFile);
+  fseek(outputFile, -4, SEEK_CUR);
 
   if (availableSpace < registerSize) {
     int nextOffset;
 
     fread(&nextOffset, sizeof(int), 1, outputFile);
-    findFirstFit(outputFile, nextOffset, registerSize);
-  }  
+    findFirstFit(outputFile, nextOffset, prevOffset,registerSize);
+  }
 
   return;
 }

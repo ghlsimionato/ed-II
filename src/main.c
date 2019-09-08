@@ -8,7 +8,6 @@
 
 int main() {
   int menuChoice, quitMenu = FALSE;
-  char * string;
   struct Register * test;
 
   do {
@@ -30,6 +29,7 @@ int main() {
       case REMOVE:
         // readFileRegisters();
         // string = getStringFromUser(4);
+        cleanStdin();
         removeRegister(getStringFromUser(4));
 
         printf("\nRemoving data\n");

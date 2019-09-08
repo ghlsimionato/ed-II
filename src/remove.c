@@ -1,13 +1,5 @@
 #include "./headers/remove.h"
 
-int getRegisterOffset(FILE * outputFile, char * id) {
-
-}
-
-void writeDeleteInformation(FILE * outputFile, int offset) {
-
-}
-
 struct DeleteRegister * searchForId(FILE * outputFile, char * id) {
   struct DeleteRegister * fileData;
   fileData = readFileRegister(outputFile);
@@ -17,7 +9,9 @@ struct DeleteRegister * searchForId(FILE * outputFile, char * id) {
     return NULL;
   }
 
-  if (strcmp(fileData->data.id, id) == STR_MATCH) {
+  // if regSize is 0, the data is marked for removal
+
+  if (fileData->regSize != 0 && strcmp(fileData->data.id, id) == STR_MATCH) {
     return fileData;
   }
 
@@ -30,8 +24,13 @@ void removeRegister(char * id) {
   struct Header headerToWrite;
   struct DeleteRegister * fileData;
 
-  header = getFileHeader(outputFile); /* reads the header to advance file pointer */
+  header = getFileHeader(outputFile); /* reads the header to advance file pointer and get offset */
   fileData = searchForId(outputFile, id);
+
+  if (fileData == NULL) {
+    return;
+  }
+
   int offsetToReturn = -(fileData->regSize + 4);
 
   if (fileData != NULL) {

@@ -82,6 +82,12 @@ struct DeleteRegister * readFileRegister(FILE * outputFile) {
   if (fread(&registerSize, sizeof(int), 1, outputFile)) {
     buffer = malloc(registerSize);
     fread(buffer, registerSize, 1, outputFile);
+
+    if (buffer[0] == '*') {
+      dataToDelete->regSize = 0;
+      return dataToDelete;
+    }
+
     printf("\nBUFFER %s\n", buffer);
     tkn = strtok(buffer, "#");
     strcpy(dataToDelete->data.id, tkn);
@@ -123,7 +129,7 @@ void dumpFile(char * fileName, char * fileMode)
     FILE * fPointer;
     fPointer = fopen(fileName, fileMode);
     unsigned char buf[16];
-    int i;
+    unsigned int i;
 
     printf("\n");
     while(fread(buf, 1, sizeof(buf), fPointer) > 0)

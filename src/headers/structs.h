@@ -3,6 +3,8 @@
 #include "constants.h"
 
 #define STRUCTS_H
+
+// Struct for the file Header
 struct Header {
   int offest;
 };

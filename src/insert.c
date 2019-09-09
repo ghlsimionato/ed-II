@@ -80,6 +80,12 @@ void insertRegister(struct Register dataToInsert) {
   return;
 }
 
+void replacePreviousOffset(FILE * outputFile, int offset, int offsetToSet) {
+  fseek(outputFile, offset + 4, SEEK_SET);
+  fwrite(offsetToSet, sizeof (int), 1, outputFile);
+  return;
+}
+
 void findFirstFit(FILE * outputFile, int offset, int prevOffset, int registerSize) {
   if (offset == -1) {
     return;
@@ -88,9 +94,9 @@ void findFirstFit(FILE * outputFile, int offset, int prevOffset, int registerSiz
   char marker;
   int nextOffset;
   int availableSpace;
-  // prevOffset = offset;
+  prevOffset = offset;
 
-  fseek(outputFile, offset, SEEK_CUR);
+  fseek(outputFile, offset + 1, SEEK_CUR);
   fread(&availableSpace, sizeof(int), 1, outputFile);
   fread(&marker, sizeof (char), 1, outputFile);
 
@@ -111,5 +117,55 @@ void findFirstFit(FILE * outputFile, int offset, int prevOffset, int registerSiz
     return;
   }
 
+  replacePreviousOffset(outputFile, prevOffset, nextOffset);
+
+
   return;
+}
+
+long getFileSize(FILE * fPointer) {
+  fseek(fPointer, 0, SEEK_END);
+  int fSize = ftell(fPointer);
+  rewind(fPointer);
+
+  return fSize;
+}
+
+struct Register * readDataFile(FILE * dataFile) {
+  struct Register * buffer;
+  long buffSize = getFileSize(dataFile);
+  int registerSize = sizeof (struct Register);
+  int numOfRegsToRead = buffSize / registerSize;
+
+  buffer = malloc(numOfRegsToRead * registerSize);
+
+  fread(buffer, registerSize, numOfRegsToRead, dataFile);
+  fclose(dataFile);
+
+  return buffer;
+}
+
+/* Not checking if already inserted */
+void insertDataFromFile() {
+  FILE * inputData = openFile(DATA_FILE_PATH, READ_BIN);
+  FILE * insertedFile = openFile(INSERTED_REG_PATH, READ_WRITE_BIN);
+  char input;
+
+  struct Register * dataArray = readDataFile(inputData);
+  for (int i = 0; i < 8; i++) {
+    printf("\nData to insert: \n");
+    printf("\nID: %s", dataArray[i].id);
+    printf("\nName: %s", dataArray[i].name);
+    printf("\nInsurance: %s", dataArray[i].insurance);
+    printf("\nInsurance type: %s", dataArray[i].insuranceType);
+    printf('\nInsert this register? [y/n] ');
+    scanf(" %c", &input);
+
+    if (input == 'y') {
+      insertRegister(dataArray[i]);
+      fprintf(insertedFile ,"%s|");
+    }
+  }
+
+  free(dataArray);
 }

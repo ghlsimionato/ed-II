@@ -23,16 +23,15 @@ int main() {
 
     switch (menuChoice) {
       case INSERT:
+      // Not all logic was implemented
         handleUserInsert();
         break;
 
       case REMOVE:
-        // readFileRegisters();
-        // string = getStringFromUser(4);
+        // Apparently working
         cleanStdin();
+        printf("Insert ID: ");
         removeRegister(getStringFromUser(4));
-
-        printf("\nRemoving data\n");
         break;
 
       case COMPACT_FILE:
@@ -44,12 +43,9 @@ int main() {
         break;
 
       case LOAD_FILES:
-        test = readDataFile(openFile(DATA_FILE_PATH, READ_BIN));
-        // int regCount = sizeof (*test) / sizeof (struct Register);
-        for (int i = 0; i < 8; i++) {
-          insertRegister(test[i]);
-        }
-        free(test);
+        // does not load the remove.bin
+        // does not mark which registers were inserted
+        insertDataFromFile();
         break;
 
       case QUIT:

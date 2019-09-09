@@ -12,3 +12,6 @@ int getRegisterSize(struct Register input);
 void formatData(char * buffer, struct Register dataToFormat);
 void insertRegister(struct Register dataToInsert);
 void findFirstFit(FILE * outputFile, int offset, int prevOffset, int registerSize);
+long getFileSize(FILE * fPointer);
+struct Register * readDataFile(FILE * dataFile);
+void insertDataFromFile();

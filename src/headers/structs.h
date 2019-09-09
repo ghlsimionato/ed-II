@@ -10,7 +10,7 @@ struct Header {
 };
 
 struct Register {
-  char id[4], name[51], insurance[51], insuranceType[31];
+  char id[4], name[50], insurance[50], insuranceType[30];
 };
 
 struct DeleteRegister {

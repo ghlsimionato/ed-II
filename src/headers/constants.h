@@ -14,7 +14,10 @@
 
 /* Paths */
 #define DATA_FILE_PATH "./data/input/insere.bin"
+#define REMOVE_DATA_FILE_PATH "./data/input/remove.bin"
 #define OUTPUT_FILE_PATH "./build/output_file.bin"
+#define INSERTED_REG_PATH "./build/inserted_registers.bin"
+#define REMOVED_REG_PATH "./build/removed_registers.bin"
 
 /* File modes */
 #define READ_BIN "rb"

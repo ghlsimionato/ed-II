@@ -35,28 +35,6 @@ int initializeFile(FILE * outputFile) {
   return 0;
 }
 
-long getFileSize(FILE * fPointer) {
-  fseek(fPointer, 0, SEEK_END);
-  int fSize = ftell(fPointer);
-  rewind(fPointer);
-
-  return fSize;
-}
-
-struct Register * readDataFile(FILE * dataFile) {
-  struct Register * buffer;
-  long buffSize = getFileSize(dataFile);
-  int registerSize = sizeof (struct Register);
-  int numOfRegsToRead = buffSize / registerSize;
-
-  buffer = malloc(buffSize);
-
-  fread(buffer, registerSize, numOfRegsToRead, dataFile);
-  fclose(dataFile);
-
-  return buffer;
-}
-
 void updateFileHeader(struct Header headerData, FILE * outputFile) {
   rewind(outputFile);
   fwrite(&headerData, sizeof (struct Header), 1, outputFile);
@@ -73,8 +51,7 @@ struct Header getFileHeader(FILE * fPointer) {
 struct DeleteRegister * readFileRegister(FILE * outputFile) {
   int registerSize;
   struct DeleteRegister * dataToDelete;
-  // struct Register * dataRead;
-  // dataRead = malloc(sizeof (struct Register));
+
   dataToDelete = malloc(sizeof (struct DeleteRegister));
   char * tkn;
   char * buffer;
@@ -124,8 +101,7 @@ void readFileRegisters() {
 
 }
 
-void dumpFile(char * fileName, char * fileMode)
-{
+void dumpFile(char * fileName, char * fileMode) {
     FILE * fPointer;
     fPointer = fopen(fileName, fileMode);
     unsigned char buf[16];

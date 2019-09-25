@@ -4,20 +4,23 @@
 
 /* Menu */
 #define INSERT 1
-#define REMOVE 2
-#define COMPACT_FILE 3
+#define SEARCH_PK 2
+#define SEARCH_SK 3
 #define DUMP_FILE 4
 #define LOAD_FILES 5
 #define QUIT 0
 /* Menu debug options */
 #define CHECK_SPACE_LIST 6
 
-/* Paths */
+/* Paths for provided files */
 #define DATA_FILE_PATH "./data/input/insere.bin"
-#define REMOVE_DATA_FILE_PATH "./data/input/remove.bin"
+#define SEARCH_PK_FILE_PATH "./data/search/busca_p.bin"
+#define SEARCH_SK_FILE_PATH "./data/search/busca_s.bin"
+
+/* Paths for created files */
 #define OUTPUT_FILE_PATH "./build/output_file.bin"
-#define INSERTED_REG_PATH "./build/inserted_registers.bin"
-#define REMOVED_REG_PATH "./build/removed_registers.bin"
+#define PK_FILE_PATH "./build/pk_index.bin"
+#define SK_FILE_PATH "./build/sk_index.bin"
 
 /* File modes */
 #define READ_BIN "rb"

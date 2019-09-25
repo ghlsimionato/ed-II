@@ -4,7 +4,6 @@
 #include "./headers/structs.h"
 #include "./headers/constants.h"
 #include "./headers/insert.h"
-#include "./headers/remove.h"
 
 int main() {
   int menuChoice, quitMenu = FALSE;
@@ -24,21 +23,26 @@ int main() {
     switch (menuChoice) {
       case INSERT:
       // Not all logic was implemented
-        handleUserInsert();
+        // read data from file and insert each register individually
+        // need to know which register was already inserted
         break;
 
-      case REMOVE:
-        // Apparently working
-        cleanStdin();
-        printf("Insert ID: ");
-        removeRegister(getStringFromUser(4));
+      case SEARCH_PK:
+        // not implemented yet
+        printf("\nSearching by PK\n");
         break;
 
-      case COMPACT_FILE:
-        printf("\nCompacting file\n");
+      case SEARCH_SK:
+        // not implemented yet
+        printf("\nSearching by SK\n");
         break;
       
       case DUMP_FILE:
+        // TODO: choose which file to dump and passing to dump_file
+        // files to dump:
+        // data_file
+        // pk_file
+        // sk_file
         dumpFile(DATA_FILE_PATH, READ_WRITE_BIN);
         break;
 
